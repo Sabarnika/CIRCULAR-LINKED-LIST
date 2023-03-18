@@ -1,0 +1,63 @@
+// You are using GCC
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+}*head=NULL;
+void create()
+{
+    struct node *newn=(struct node*)malloc(sizeof(struct node));
+    scanf("%d",&newn->data);
+    newn->next=NULL;
+    if(head==NULL)
+    {
+        head=newn;
+        newn->next=head;
+    }
+    else
+    {
+        struct node *temp=head;
+        while(temp->next!=head)
+        {
+            temp=temp->next;
+        }
+        temp->next=newn;
+        newn->next=head;
+    }
+}
+void del()
+{
+    struct node *temp=head,*temp1;
+    while(temp->next!=head)
+    {
+        temp1=temp;
+        temp=temp->next;
+    }
+    temp1->next=head;
+    free(temp);
+}
+void display()
+{
+    struct node *temp=head;
+    while(temp->next!=head)
+    {
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+    printf("%d ",temp->data);
+}
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+    {
+        create();
+    }
+    printf("Data entered in the list are\n");
+    display();
+    printf("\nAfter deletion the new list are\n");
+    del();
+    display();
+}
